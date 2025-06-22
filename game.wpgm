@@ -6,7 +6,7 @@ program juego {
   game.width(8)
   game.height(8)
   game.cellSize(50)
-  game.title("Hackeando la Red - Pepita Style")
+  game.title("Hackeando la Red")
 
  
   game.addVisual(fondo)
