@@ -3,21 +3,13 @@ import personajes.*
 
 program juego {
 
-  game.width(8)
-  game.height(8)
-  game.cellSize(50)
-  game.title("Hackeando la Red")
-
- 
-  game.addVisual(fondo)
-
-  game.addVisual(jugador)
+  gemu.iniciar()
 
 
-  keyboard.up().onPressDo { jugador.move(jugador.position().up(1)) }
-  keyboard.down().onPressDo { jugador.move(jugador.position().down(1)) }
-  keyboard.left().onPressDo { jugador.move(jugador.position().left(1)) }
-  keyboard.right().onPressDo { jugador.move(jugador.position().right(1)) }
+  //keyboard.up().onPressDo { jugador.move(jugador.position().up(1)) }
+  //keyboard.down().onPressDo { jugador.move(jugador.position().down(1)) }
+  //keyboard.left().onPressDo { jugador.move(jugador.position().left(1)) }
+  //keyboard.right().onPressDo { jugador.move(jugador.position().right(1)) }
 		
   game.start()
 }
