@@ -5,6 +5,12 @@ program juego {
 
   gemu.iniciar()
 
+  game.whenCollideDo(jugador, {elemento => 
+           jugador.recolectar(elemento)
+            game.removeVisual(elemento)})
+  keyboard.a().onPressDo{game.say(jugador, jugador.cuantosArchivos())}
+        
+
 
   //keyboard.up().onPressDo { jugador.move(jugador.position().up(1)) }
   //keyboard.down().onPressDo { jugador.move(jugador.position().down(1)) }

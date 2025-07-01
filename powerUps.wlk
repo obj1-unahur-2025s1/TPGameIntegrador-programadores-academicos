@@ -13,8 +13,8 @@ object imanDeArchivos inherits PowerUp{
     }
 }
 
-object rayoDeVelocidad inherits PowerUp{
+object armadura inherits PowerUp{
     override method activar(unJugador){
-        unJugador.velocidad=(unJugador.velocidad)*2
+        unJugador.resistencia(2)
     }
 }
