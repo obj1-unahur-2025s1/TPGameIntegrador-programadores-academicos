@@ -8,6 +8,7 @@ program juego {
   game.width(8)
   game.height(8)
   game.boardGround("fondo_final2.jpg")
+  game.addVisualCharacter(jugador)
 
   escenario.iniciar()
 

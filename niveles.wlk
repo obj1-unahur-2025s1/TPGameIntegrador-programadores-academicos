@@ -1,5 +1,6 @@
 import wollok.game.*
 import personajes.*
+import powerUps.*
 
 object nivel1 {
   const elementosNivel = [] 
@@ -9,10 +10,10 @@ object nivel1 {
     const enemigo2 = new Simpatico(position = game.at(4,1))
     const enemigo3 = new Feo(position = game.at(6,6))
     const archivo1 = new Archivo(position = game.at(5,5))
-    const archivo2 =new Archivo(position = game.at(0,3))
-    const archivo3 = new Archivo(position = game.at(6,0))
-    self.agregarTodos([enemigo1,enemigo2,enemigo3,archivo1,archivo2,archivo3])
-    game.addVisualCharacter(jugador)
+    const archivo2 = new Archivo(position = game.at(0,3))
+    const archivo3 = new Archivo(position = game.at(6,0))    
+    self.agregarTodos([enemigo1,enemigo2,enemigo3,archivo1,archivo2,archivo3,jugador,puertaSalida, armadura ])
+    game.addVisual(armadura)      
     game.addVisual(enemigo1)
     game.addVisual(enemigo2)
     game.addVisual(enemigo3)
@@ -26,21 +27,23 @@ object nivel1 {
   method removerTodo(){
     elementosNivel.forEach({e => game.removeVisual(e)})
   }
+  method condicionDeSalida() = 3
 }
 object nivel2 {
     const elementosNivel = [] 
     method agregarTodos(unaLista) = elementosNivel.addAll(unaLista) 
-    method iniciar(){
+    method iniciar(){     
     const enemigo1 = new Explosivo(position = game.at(6,4))
     const enemigo2 = new Simpatico(position = game.at(4,1))
     const enemigo3 = new Feo(position = game.at(6,6))
     const enemigo4 = new Raro(position = game.at(2,2)) 
     const archivo1 = new Archivo(position = game.at(5,5))
-    const archivo2 =new Archivo(position = game.at(0,3))
+    const archivo2 = new Archivo(position = game.at(0,3))
     const archivo3 = new Archivo(position = game.at(6,0))
     const archivo4 = new Archivo(position = game.at(2,7))
-    self.agregarTodos([enemigo1,enemigo2,enemigo3,enemigo4,archivo1,archivo2,archivo3,archivo4])
-    game.addVisualCharacter(jugador)
+    self.agregarTodos([enemigo1,enemigo2,enemigo3,enemigo4,archivo1,archivo2,archivo3,archivo4,armadura, 
+                        jugador,puertaSalida])
+    game.addVisual(armadura)     
     game.addVisual(enemigo1)
     game.addVisual(enemigo2)
     game.addVisual(enemigo3)
@@ -56,24 +59,25 @@ object nivel2 {
   method removerTodo(){
     elementosNivel.forEach({e => game.removeVisual(e)})
   }
+  method condicionDeSalida() = 4
 }
 object nivel3 {
     const elementosNivel = [] 
     method agregarTodos(unaLista) = elementosNivel.addAll(unaLista) 
-    method iniciar(){
+    method iniciar(){    
     const enemigo1 = new Explosivo(position = game.at(6,4))
     const enemigo2 = new Simpatico(position = game.at(4,1))
     const enemigo3 = new Feo(position = game.at(6,6))
     const enemigo4 = new Raro(position = game.at(2,2)) 
     const enemigo5 = new Explosivo(position = game.at(4,6))
     const archivo1 = new Archivo(position = game.at(5,5))
-    const archivo2 =new Archivo(position = game.at(0,3))
+    const archivo2 = new Archivo(position = game.at(0,3))
     const archivo3 = new Archivo(position = game.at(6,0))
     const archivo4 = new Archivo(position = game.at(2,7))
     const archivo5 = new Archivo(position = game.at(7,2))
-    self.agregarTodos([enemigo1,enemigo2,enemigo3,enemigo4,enemigo5,
-                     archivo1,archivo2,archivo3,archivo4,archivo5])
-    game.addVisualCharacter(jugador)
+    self.agregarTodos([enemigo1,enemigo2,enemigo3,enemigo4,enemigo5,armadura, 
+                     archivo1,archivo2,archivo3,archivo4,archivo5, jugador,puertaSalida])
+    game.addVisual(armadura)                      
     game.addVisual(enemigo1)
     game.addVisual(enemigo2)
     game.addVisual(enemigo3)
@@ -91,5 +95,6 @@ object nivel3 {
     method removerTodo(){
     elementosNivel.forEach({e => game.removeVisual(e)})
   }
+  method condicionDeSalida() = 5
   
 }

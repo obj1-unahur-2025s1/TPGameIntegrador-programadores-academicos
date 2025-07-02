@@ -1,20 +1,15 @@
+import wollok.game.*
 import personajes.*
 
-class PowerUp{
 
+object armadura {
+    var property position = game.at(3,3)
+    method image() = 'armadura1.png'
     method activar(unJugador){
-
-    }
-}
-
-object imanDeArchivos inherits PowerUp{
-    override method activar(unJugador){
-
-    }
-}
-
-object armadura inherits PowerUp{
-    override method activar(unJugador){
         unJugador.resistencia(2)
+        game.onTick(10000, 'desactivarPoder', {unJugador.resistencia(1)})
+    }
+    method chocar(unJugador){
+        self.activar(unJugador)
     }
 }

@@ -6,7 +6,8 @@ object escenario{
     const listaNiveles =[nivel1, nivel2, nivel3]
     var nivelActual = 0
     
-    method condicionDeSalida() = listaNiveles.get(nivelActual).concondicionDeSalida()
+     
+    method condicionDeSalida() = listaNiveles.get(nivelActual).condicionDeSalida()
     method iniciar(){
         listaNiveles.get(nivelActual).iniciar()
         }
@@ -14,32 +15,46 @@ object escenario{
         listaNiveles.get(nivelActual).removerTodo()
         nivelActual += 1
         if (nivelActual < listaNiveles.size()) {
-        listaNiveles.get(nivelActual).iniciar()
+            jugador.position(game.origin())
+            jugador.restaurarEnergia()
+            jugador.limpiarArchivos() 
+            game.addVisual(jugador)           
+            listaNiveles.get(nivelActual).iniciar()
+        }
     }
+    method reiniciarNivel(){
+        listaNiveles.get(nivelActual).removerTodo()
+        jugador.position(game.origin())
+        jugador.restaurarEnergia()
+        jugador.limpiarArchivos()   
+        jugador.resistencia(1)
+        game.addVisual(jugador) 
+        listaNiveles.get(nivelActual).iniciar()         
     }
 
 }
-
 
 object jugador{
     var property position = game.origin()//game.at(0, 0)
     var energia = 100
     var property resistencia = 1
-    var archivosRecolectados = 0
-    const powerUpsActivos = []
+    var archivosRecolectados = 0     
 
     method usarPowerUp(unPowerUp){
-        unPowerUp.activar()
-        powerUpsActivos.add(unPowerUp)
+        unPowerUp.activar()         
     }
+    method limpiarArchivos(){archivosRecolectados = 0}
+    method restaurarEnergia(){energia = 100}
     method recolectar(){archivosRecolectados +=1}
     method recibirDaño(unEnemigo){
-        if (resistencia == 1){
-            energia = energia - unEnemigo.danio()
-        }
-        else {
-            energia = energia - unEnemigo.danio()/resistencia
-        }        
+        if(self.estaMuerto()){escenario.reiniciarNivel()}
+        else{
+             if (resistencia == 1){
+                energia = (energia - unEnemigo.danio()).max(0)
+               }
+            else {
+                energia = (energia - unEnemigo.danio()/resistencia).max(0)
+              } }       
     }  
     method image() = if (resistencia==1) "Hacker1.png" else 'Hacker2.png'  
 	method move(nuevaPosicion) {
@@ -47,8 +62,8 @@ object jugador{
 	}
     method cuantosArchivos() = archivosRecolectados
     method mensaje() = 'tengo '+ archivosRecolectados  +' archivos y energia '+ energia
-    method verificarSalida(unElemento) = unElemento.puedeSalir(self)
-    method nivelQueEsta()
+    method estaMuerto() = energia == 0
+     
     
 }
 class Archivo{
@@ -65,7 +80,7 @@ class Enemigo{
     var techo = false
     method danio() = 5
     method chocar(unJugador) {
-        unJugador.recibirDaño(self)
+         unJugador.recibirDaño(self)
     } 
 
 }
@@ -101,7 +116,7 @@ class Feo inherits Enemigo{
         const y = 0.randomUpTo(game.height()).truncate(0)
         position = game.at(x,y)
     }
-    override method danio() = super() +2
+    override method danio() = super() + 2
 }
 class Raro inherits Enemigo{
 
@@ -121,12 +136,12 @@ object puertaSalida{
     
     method image() = 'puerta.jpg' 
     method chocar(unJugador){
-        if(self.puedeSalir(unJugador, unEscenario)){
+        if(self.puedeSalir(unJugador)){
             self.abrir()
-            unEscenario.pasarDeNivel()}
+            escenario.pasarDeNivel()}
     }
     method abrir() {estaAbierta=true} 
    
-    method puedeSalir(unJugador, unEscenario) = unJugador.cuantosArchivos() == unEscenario.condicionDeSalidad()
+    method puedeSalir(unJugador) = unJugador.cuantosArchivos() ==  escenario.condicionDeSalida()
 }
 
