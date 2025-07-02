@@ -1,21 +1,19 @@
 import wollok.game.*
 import personajes.* 
+import niveles.*
+
 
 program juego {
+  game.title("Hackeando la Red")
+  game.width(8)
+  game.height(8)
+  game.boardGround("fondo_final2.jpg")
 
-  gemu.iniciar()
+  escenario.iniciar()
 
   game.whenCollideDo(jugador, {elemento => 
-           jugador.recolectar(elemento)
-            game.removeVisual(elemento)})
-  keyboard.a().onPressDo{game.say(jugador, jugador.cuantosArchivos())}
-        
-
-
-  //keyboard.up().onPressDo { jugador.move(jugador.position().up(1)) }
-  //keyboard.down().onPressDo { jugador.move(jugador.position().down(1)) }
-  //keyboard.left().onPressDo { jugador.move(jugador.position().left(1)) }
-  //keyboard.right().onPressDo { jugador.move(jugador.position().right(1)) }
-		
+           elemento.chocar(jugador)})
+  keyboard.a().onPressDo{game.say(jugador, jugador.mensaje())}
+ 		
   game.start()
 }

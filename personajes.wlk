@@ -1,34 +1,22 @@
 import wollok.game.*
+import niveles.*
+import powerUps.*
 
-object gemu{
-
-    method iniciar(){
-        const enemigo1 = new Explosivo(position = game.at(6,4))
-        const enemigo2 = new Simpatico(position = game.at(4,1))
-        const enemigo3 = new Feo(position = game.at(6,6))
-        const enemigo4 = new Raro(position = game.at(2,2))
-        const archivo1 = new Archivo(position = game.at(5,5))
-        const archivo2 =new Archivo(position = game.at(0,3))
-        const archivo3 = new Archivo(position = game.at(6,0))
-        
-        game.title("Hackeando la Red")
-        game.width(8)
-        game.height(8)
-        game.boardGround("fondo_final2.jpg")
-        game.addVisualCharacter(jugador)
-        game.addVisual(enemigo1)
-        game.addVisual(enemigo2)
-        game.addVisual(enemigo3)
-        game.addVisual(enemigo4)
-        game.addVisual(archivo1)
-        game.addVisual(archivo2)
-        game.addVisual(archivo3)
-
-        game.onTick(1000, 'movimiento', {enemigo2.mover();enemigo1.mover();
-        enemigo4.mover();enemigo3.mover()})
-        
-        }
+object escenario{
+    const listaNiveles =[nivel1, nivel2, nivel3]
+    var nivelActual = 0
     
+    method condicionDeSalida() = listaNiveles.get(nivelActual).concondicionDeSalida()
+    method iniciar(){
+        listaNiveles.get(nivelActual).iniciar()
+        }
+    method pasarDeNivel() {
+        listaNiveles.get(nivelActual).removerTodo()
+        nivelActual += 1
+        if (nivelActual < listaNiveles.size()) {
+        listaNiveles.get(nivelActual).iniciar()
+    }
+    }
 
 }
 
@@ -37,60 +25,50 @@ object jugador{
     var property position = game.origin()//game.at(0, 0)
     var energia = 100
     var property resistencia = 1
-    const archivosRecolectados = []
+    var archivosRecolectados = 0
     const powerUpsActivos = []
 
-   method recolectar(unElemento){
-        if(unElemento.toString() == 'an Archivo'){
-            archivosRecolectados.add(unElemento)
-        }
-        else{
-            self.recibirDaño(unElemento.danio())
-        }
-        
-         
-    }
     method usarPowerUp(unPowerUp){
         unPowerUp.activar()
         powerUpsActivos.add(unPowerUp)
     }
-
+    method recolectar(){archivosRecolectados +=1}
     method recibirDaño(unEnemigo){
         if (resistencia == 1){
             energia = energia - unEnemigo.danio()
         }
         else {
             energia = energia - unEnemigo.danio()/resistencia
-        }
-        
-    }
-
-  
-    method image() = if (resistencia==1) "Hacker1.png" else 'Hacker2.png'
-
-  
+        }        
+    }  
+    method image() = if (resistencia==1) "Hacker1.png" else 'Hacker2.png'  
 	method move(nuevaPosicion) {
 		self.position(nuevaPosicion)
 	}
-    method cuantosArchivos()= 'tengo estos '+ archivosRecolectados.size() +' archivos y esta energia '+ energia
+    method cuantosArchivos() = archivosRecolectados
+    method mensaje() = 'tengo '+ archivosRecolectados  +' archivos y energia '+ energia
+    method verificarSalida(unElemento) = unElemento.puedeSalir(self)
+    method nivelQueEsta()
     
 }
 class Archivo{
     var property position
 
     method image() = 'archivoA.png'
-   
+    method chocar(unJugador) {
+        unJugador.recolectar()
+        game.removeVisual(self)
+    }   
 }
-
-
-
 class Enemigo{
     var property position //= game.center()
     var techo = false
     method danio() = 5
+    method chocar(unJugador) {
+        unJugador.recibirDaño(self)
+    } 
 
 }
-
 class Explosivo inherits Enemigo{
 
     method image() = "bomb.png"
@@ -102,9 +80,7 @@ class Explosivo inherits Enemigo{
         if(position.x() == 0) techo = false
         }
     override method danio() = super()*3    
-
 }
-
 class Simpatico inherits Enemigo{ 
 
     method image() = "Enemigo2.png"
@@ -114,12 +90,8 @@ class Simpatico inherits Enemigo{
         if(techo and position.y() > 0 ) position = position.down(1)
         if(position.y() == 7) techo = true
         if(position.y() == 0) techo = false
-        }
-
-
-    
+        }    
 }
-
 class Feo inherits Enemigo{
 
     method image() = "Enemigo4.png"
@@ -131,7 +103,6 @@ class Feo inherits Enemigo{
     }
     override method danio() = super() +2
 }
-
 class Raro inherits Enemigo{
 
     method image() = "Enemigo3.png"
@@ -144,23 +115,18 @@ class Raro inherits Enemigo{
         }
     override method danio() = super() + super()*0.2    
 }
-
-
-
-
 object puertaSalida{
+    var property position = game.at(7,7)
     var estaAbierta = false
-
-    method abrir(){
-        estaAbierta=true
+    
+    method image() = 'puerta.jpg' 
+    method chocar(unJugador){
+        if(self.puedeSalir(unJugador, unEscenario)){
+            self.abrir()
+            unEscenario.pasarDeNivel()}
     }
-
-    method verificar(listaDeArchivos){
-        
-    }
+    method abrir() {estaAbierta=true} 
+   
+    method puedeSalir(unJugador, unEscenario) = unJugador.cuantosArchivos() == unEscenario.condicionDeSalidad()
 }
 
-//object fondo{
- //   method position()=game.at(0,0)
-
- //   method image()="fondo_final2.jpg"}
