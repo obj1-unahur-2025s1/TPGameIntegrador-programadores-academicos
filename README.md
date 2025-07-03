@@ -45,7 +45,6 @@ Una vez que se recolectan todos los archivos, se abre la **puerta de enlace** qu
 ### Power-ups
 Objetos especiales que otorgan ventajas al hacker:
 
-- **🧲 Imán de Archivos**: permite atraer automáticamente archivos cercanos.
 - **🛡️ Armadura**: protege al hacker del daño por 10 segundos.
 
 ### 🚪 Puerta de enlace
