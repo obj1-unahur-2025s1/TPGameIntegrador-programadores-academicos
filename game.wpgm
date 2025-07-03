@@ -8,14 +8,16 @@ program juego {
   game.title("Hackeando la Red")
   game.width(8)
   game.height(8)
-  game.boardGround("Pantalla_inicio.png")
-  keyboard.j().onPressDo{if(escenario.estadoJuego()){escenario.iniciarJuego()} }
-  keyboard.i().onPressDo{escenario.pantallaInstrucciones()}
+  game.boardGround("fondo_final2.jpg")
+  keyboard.j().onPressDo{if(not escenario.estadoJuego()){
+    escenario.iniciarJuego()} }
+  //keyboard.i().onPressDo{escenario.pantallaInstrucciones()}
   game.addVisualCharacter(jugador)
-  
+  escenario.iniciar()
+  keyboard.space().onPressDo{escenario.reinicioDeJuego()}
+ 		
 
   game.whenCollideDo(jugador, {elemento => elemento.chocar(jugador)})
-  //keyboard.a().onPressDo{game.say(jugador, jugador.mensaje())}
- 		
+  
   game.start()
 }

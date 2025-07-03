@@ -9,6 +9,7 @@ class Archivo{
     method image() = 'archivo_secreto.png'
     method chocar(unJugador) {
         unJugador.recolectar()
+        unJugador.mensajeArchivos()
         game.removeVisual(self)
     }   
 }
@@ -29,4 +30,14 @@ object puertaSalida{
     method abrir() {estaAbierta=true} 
    
     method puedeSalir(unJugador) = unJugador.cuantosArchivos() ==  escenario.condicionDeSalida()
+}
+
+object pantallaInicial{
+
+    var property position = game.origin()
+
+    method image() = 'Pantalla_inicio.png'
+
+    method chocar(unJugador){}
+
 }
