@@ -51,27 +51,17 @@ object escenario{
     }
 
   method reinicioDeJuego(){
+        listaNiveles.get(nivelActual).removerTodo()
         nivelActual = 0
         jugador.position(game.origin())
         jugador.restaurarEnergia()
         jugador.limpiarArchivos()   
         jugador.resistencia(1)        
-        listaNiveles.get(nivelActual).removerTodo()
         game.addVisual(jugador) 
         listaNiveles.get(nivelActual).iniciar()
-        game.say(jugador, 'Volver a Jugar')
+        juegoIniciado= false
+        game.say(jugador, 'Volver a Sufrir')
     }
-
-    method pantallaInstrucciones(){
-      game.addVisual(pantallaInstrucciones)
-    }
-
-}
-
-object pantallaInicial{
-
-    var property position = game.center()
-    method image() = 'Pantalla_inicio.png'
 
 }
 
@@ -83,12 +73,15 @@ object pantallaInstrucciones{
 }
 
 object nivelBase{
+
     method iniciar(){
       game.addVisual(pantallaInicial)
     }
 
     method removerTodo(){
       game.removeVisual(pantallaInicial)
+      game.removeVisual(jugador)
+
     }
 
     method irAPrimerNivel(){

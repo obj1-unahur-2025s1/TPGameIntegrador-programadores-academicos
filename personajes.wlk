@@ -38,7 +38,6 @@ object jugador{
     method cuantosArchivos() = archivosRecolectados
     method mensajeArchivos() = 'Tengo '+ archivosRecolectados  +' archivos'
     method mensajeEnergia() = 'Tengo '+ energia  +' de energia'
-    method estaMuerto() = energia == 0
-     
+    method estaMuerto() = energia == 0   
     
 }

@@ -1,6 +1,7 @@
 import powerUps.*
 import wollok.game.*
 import personajes.*
+import enemigos.*
 
 describe "Grupo de tests para game" {
 
