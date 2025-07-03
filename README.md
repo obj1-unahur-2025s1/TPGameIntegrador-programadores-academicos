@@ -8,8 +8,8 @@
 - Thomas
 
 ## Capturas
-![Pantalla](assets/Pantalla_inicio.png)
-![alt text](assets/Captura_juego.png)
+![Pantalla](assets/Pantalla_inicio.jpg)
+![Juego](assets/Captura_juego.png)
 
 
 ## Reglas de Juego / Instrucciones
