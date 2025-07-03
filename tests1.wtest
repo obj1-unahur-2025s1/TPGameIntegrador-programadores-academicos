@@ -2,6 +2,8 @@ import powerUps.*
 import wollok.game.*
 import personajes.*
 import enemigos.*
+import objetos.*
+import niveles.*
 
 describe "Grupo de tests para game" {
 
@@ -22,6 +24,49 @@ describe "Grupo de tests para game" {
       armadura.activar(jugador)
       firewall.chocar(jugador)
       assert.equals(92.5, jugador.energia())
+    }
+
+    test "El jugador no puede pasar de nivel si no tiene todos los archivos." {
+     escenario.iniciarJuego()
+     assert.notThat(puertaSalida.puedeSalir(jugador))
+    }
+
+    test "El jugador puede salir si recolecta los 3 archivos del primer nivel" {
+     escenario.iniciarJuego()
+     jugador.recolectar()
+     jugador.recolectar()
+     jugador.recolectar()
+     assert.that(puertaSalida.puedeSalir(jugador))
+    }
+
+    test "Cuando el jugador pierde toda la energia se reinician los archivos recolectados." {     
+      jugador.recolectar()
+      jugador.recolectar()
+      jugador.recolectar()
+      firewall.chocar(jugador)
+      firewall.chocar(jugador)
+      firewall.chocar(jugador)
+      firewall.chocar(jugador)
+      firewall.chocar(jugador)
+      firewall.chocar(jugador)
+      firewall.chocar(jugador)
+      firewall.chocar(jugador)  //el enemigo le saca energia al jugador hasta reducirla a cero
+      assert.equals(0, jugador.cuantosArchivos())
+    }
+
+    test "Cuando el jugador pierde toda la energia la recupera completamente debido al reinicio de nivel" {
+      jugador.recolectar()
+      jugador.recolectar()
+      jugador.recolectar()
+      firewall.chocar(jugador)
+      firewall.chocar(jugador)
+      firewall.chocar(jugador)
+      firewall.chocar(jugador)
+      firewall.chocar(jugador)
+      firewall.chocar(jugador)
+      firewall.chocar(jugador)
+      firewall.chocar(jugador)
+      assert.equals(100, jugador.energia())
     }
 }
 
