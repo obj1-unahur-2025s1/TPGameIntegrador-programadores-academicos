@@ -4,8 +4,6 @@ import powerUps.*
 import enemigos.*
 import objetos.*
 
-
-
 object escenario{
     const listaNiveles =[nivelBase, nivel1, nivel2, nivel3]
     var nivelActual = 0
