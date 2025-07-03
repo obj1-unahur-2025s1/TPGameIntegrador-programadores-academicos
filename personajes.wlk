@@ -20,6 +20,11 @@ object escenario{
             jugador.limpiarArchivos() 
             game.addVisual(jugador)           
             listaNiveles.get(nivelActual).iniciar()
+            game.say(jugador, 'Nuevo Nivel!')
+        }
+        else{
+            game.addVisual(jugador)
+            game.say(jugador,'Juego Completado!!!!')
         }
     }
     method reiniciarNivel(){
@@ -29,7 +34,8 @@ object escenario{
         jugador.limpiarArchivos()   
         jugador.resistencia(1)
         game.addVisual(jugador) 
-        listaNiveles.get(nivelActual).iniciar()         
+        listaNiveles.get(nivelActual).iniciar() 
+        game.say(jugador, 'Nivel Reiniciado!')        
     }
 
 }
@@ -45,9 +51,13 @@ object jugador{
     }
     method limpiarArchivos(){archivosRecolectados = 0}
     method restaurarEnergia(){energia = 100}
-    method recolectar(){archivosRecolectados +=1}
+    method recolectar(){
+        archivosRecolectados +=1
+        game.say(self, self.mensaje())}
     method recibirDaño(unEnemigo){
-        if(self.estaMuerto()){escenario.reiniciarNivel()}
+        if(self.estaMuerto()){
+            game.say(self, 'Estoy sin energia!')
+            escenario.reiniciarNivel()}
         else{
              if (resistencia == 1){
                 energia = (energia - unEnemigo.danio()).max(0)
@@ -55,13 +65,13 @@ object jugador{
             else {
                 energia = (energia - unEnemigo.danio()/resistencia).max(0)
               } }       
-    }  
-    method image() = if (resistencia==1) "Hacker1.png" else 'Hacker2.png'  
+    } 
+    method image() = if (resistencia==1) "hacker.png" else 'hacker_escudo.png'  
 	method move(nuevaPosicion) {
 		self.position(nuevaPosicion)
 	}
     method cuantosArchivos() = archivosRecolectados
-    method mensaje() = 'tengo '+ archivosRecolectados  +' archivos y energia '+ energia
+    method mensaje() = 'Tengo '+ archivosRecolectados  +' archivos y'+ energia+ ' de energia'
     method estaMuerto() = energia == 0
      
     
@@ -69,7 +79,7 @@ object jugador{
 class Archivo{
     var property position
 
-    method image() = 'archivoA.png'
+    method image() = 'archivo_secreto.png'
     method chocar(unJugador) {
         unJugador.recolectar()
         game.removeVisual(self)
@@ -81,12 +91,13 @@ class Enemigo{
     method danio() = 5
     method chocar(unJugador) {
          unJugador.recibirDaño(self)
+         game.say(jugador, jugador.mensaje())		 
     } 
 
 }
-class Explosivo inherits Enemigo{
+class Firewall inherits Enemigo{
 
-    method image() = "bomb.png"
+    method image() = "firewall.png"
 
     method mover() {
         if(not techo and position.x() < 7) position = position.right(1)
@@ -96,9 +107,9 @@ class Explosivo inherits Enemigo{
         }
     override method danio() = super()*3    
 }
-class Simpatico inherits Enemigo{ 
+class IATraidora inherits Enemigo{ 
 
-    method image() = "Enemigo2.png"
+    method image() = "IA_Traidora.png"
 
     method mover() {
         if(not techo and position.y() < 7) position = position.up(1)
@@ -107,9 +118,9 @@ class Simpatico inherits Enemigo{
         if(position.y() == 0) techo = false
         }    
 }
-class Feo inherits Enemigo{
+class RobotAntivirus inherits Enemigo{
 
-    method image() = "Enemigo4.png"
+    method image() = "robot_antivirus.png"
 
     method mover(){
         const x = 0.randomUpTo(game.width()).truncate(0)
@@ -118,9 +129,9 @@ class Feo inherits Enemigo{
     }
     override method danio() = super() + 2
 }
-class Raro inherits Enemigo{
+class VigilanteIDS inherits Enemigo{
 
-    method image() = "Enemigo3.png"
+    method image() = "vigilante_ids.png"
 
     method mover() {
         if(not techo and position.x() < 7) position = position.right(1)
@@ -139,9 +150,11 @@ object puertaSalida{
         if(self.puedeSalir(unJugador)){
             self.abrir()
             escenario.pasarDeNivel()}
+        else{
+            game.say(jugador, 'No puedo pasar de nivel')
+        }    
     }
     method abrir() {estaAbierta=true} 
    
     method puedeSalir(unJugador) = unJugador.cuantosArchivos() ==  escenario.condicionDeSalida()
 }
-

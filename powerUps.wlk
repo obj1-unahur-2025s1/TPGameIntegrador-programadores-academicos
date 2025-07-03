@@ -4,7 +4,7 @@ import personajes.*
 
 object armadura {
     var property position = game.at(3,3)
-    method image() = 'armadura1.png'
+    method image() = 'armadura.png'
     method activar(unJugador){
         unJugador.resistencia(2)
         game.onTick(10000, 'desactivarPoder', {unJugador.resistencia(1)})
