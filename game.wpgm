@@ -3,6 +3,7 @@ import personajes.*
 import niveles.*
 
 
+
 program juego {
   game.title("Hackeando la Red")
   game.width(8)
@@ -12,9 +13,8 @@ program juego {
 
   escenario.iniciar()
 
-  game.whenCollideDo(jugador, {elemento => 
-           elemento.chocar(jugador)})
-  keyboard.a().onPressDo{game.say(jugador, jugador.mensaje())}
+  game.whenCollideDo(jugador, {elemento => elemento.chocar(jugador)})
+  //keyboard.a().onPressDo{game.say(jugador, jugador.mensaje())}
  		
   game.start()
 }

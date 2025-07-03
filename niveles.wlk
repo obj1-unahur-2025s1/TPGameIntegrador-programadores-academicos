@@ -1,6 +1,49 @@
 import wollok.game.*
 import personajes.*
 import powerUps.*
+import enemigos.*
+import objetos.*
+
+
+
+object escenario{
+    const listaNiveles =[nivel1, nivel2, nivel3]
+    var nivelActual = 0
+    
+     
+    method condicionDeSalida() = listaNiveles.get(nivelActual).condicionDeSalida()
+    method iniciar(){
+        listaNiveles.get(nivelActual).iniciar()
+        }
+    method pasarDeNivel() {
+        listaNiveles.get(nivelActual).removerTodo()
+        nivelActual += 1
+        if (nivelActual < listaNiveles.size()) {
+            jugador.position(game.origin())
+            jugador.restaurarEnergia()
+            jugador.limpiarArchivos() 
+            game.addVisual(jugador)           
+            listaNiveles.get(nivelActual).iniciar()
+            game.say(jugador, 'Nuevo Nivel!')
+        }
+        else{
+            game.addVisual(jugador)
+            game.say(jugador,'Juego Completado!!!!')
+        }
+    }
+    method reiniciarNivel(){
+        listaNiveles.get(nivelActual).removerTodo()
+        jugador.position(game.origin())
+        jugador.restaurarEnergia()
+        jugador.limpiarArchivos()   
+        jugador.resistencia(1)
+        game.addVisual(jugador) 
+        listaNiveles.get(nivelActual).iniciar() 
+        game.say(jugador, 'Nivel Reiniciado!')        
+    }
+
+}
+
 
 object nivel1 {
   const elementosNivel = [] 
