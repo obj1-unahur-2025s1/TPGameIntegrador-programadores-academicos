@@ -1,0 +1,26 @@
+import powerUps.*
+import wollok.game.*
+import personajes.*
+
+describe "Grupo de tests para game" {
+
+    const firewall = new Firewall(position = game.at(1,0))
+
+    method initialize() {
+        game.clear()  
+        game.addVisual(jugador)
+        game.addVisual(firewall)
+    }
+
+    test "Cuando el jugador colisiona con un enemigo tipo Firewall, este le reduce la energía a 85" {
+        firewall.chocar(jugador)
+        assert.equals(85, jugador.energia())
+    }
+
+    test "Cuando el jugador toma una armadura, este recibe menos daño al ser atacado por un enemigo Firewall." {
+      armadura.activar(jugador)
+      firewall.chocar(jugador)
+      assert.equals(92.5, jugador.energia())
+    }
+}
+

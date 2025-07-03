@@ -46,6 +46,7 @@ object jugador{
     var property resistencia = 1
     var archivosRecolectados = 0     
 
+    method energia() = energia 
     method usarPowerUp(unPowerUp){
         unPowerUp.activar()         
     }
