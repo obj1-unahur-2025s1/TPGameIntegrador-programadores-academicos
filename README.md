@@ -15,18 +15,18 @@
 
 ## 🎯 Objetivo
 
-Controlás a un **hacker** que debe navegar por la "**red**" para **robar todos los archivos secretos** antes de que los enemigos te atrapen.
-Una vez que se recolectan todos los archivos, se abre la **puerta de enlace** que permite pasar al **siguiente nivel**.
+Sos un **hacker** que debe navegar por la "**red**" para **robar todos los archivos secretos** antes de que los enemigos te atrapen.
+Una vez que recolectas todos los archivos, se abre la **puerta de enlace** que permite pasar al **siguiente nivel**.
 
 ---
 ## Personajes:
 
 ## 🧑‍💻 El Hacker
 
-- Se puede mover en las cuatro direcciones (arriba, abajo, izquierda, derecha).
-- Comienza con una cierta cantidad de **energía**.
-- Si un enemigo lo alcanza, **recibe daño**.
-- Puede recolectar **archivos** y **power-ups**.
+- Te podes mover en las cuatro direcciones (arriba, abajo, izquierda, derecha).
+- Comenzas con una cierta cantidad de **energía**.
+- Si un enemigo te alcanza, **recibe daño**.
+- Podes recolectar **archivos** y **power-ups**, estos ultimos te dan poderes.
 - El juego reinicia el nivel si la energía del hacker llega a **0**.
 ---
 ## 👾 Los Enemigos
