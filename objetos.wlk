@@ -17,7 +17,7 @@ object puertaSalida{
     var property position = game.at(7,7)
     var estaAbierta = false
     
-    method image() = 'puerta.jpg' 
+    method image() = 'puerta_salida.png' 
     method chocar(unJugador){
         if(self.puedeSalir(unJugador)){
             self.abrir()

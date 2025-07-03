@@ -7,9 +7,17 @@ import objetos.*
 
 
 object escenario{
-    const listaNiveles =[nivel1, nivel2, nivel3]
+    const listaNiveles =[nivelBase, nivel1, nivel2, nivel3]
     var nivelActual = 0
-    
+    var juegoIniciado = false
+
+    method iniciarJuego(){
+      juegoIniciado=true
+      
+      self.pasarDeNivel()
+    }
+    method estadoJuego()=juegoIniciado
+
      
     method condicionDeSalida() = listaNiveles.get(nivelActual).condicionDeSalida()
     method iniciar(){
@@ -42,8 +50,54 @@ object escenario{
         game.say(jugador, 'Nivel Reiniciado!')        
     }
 
+  method reinicioDeJuego(){
+        nivelActual = 0
+        jugador.position(game.origin())
+        jugador.restaurarEnergia()
+        jugador.limpiarArchivos()   
+        jugador.resistencia(1)        
+        listaNiveles.get(nivelActual).removerTodo()
+        game.addVisual(jugador) 
+        listaNiveles.get(nivelActual).iniciar()
+        game.say(jugador, 'Volver a Jugar')
+    }
+
+    method pantallaInstrucciones(){
+      game.addVisual(pantallaInstrucciones)
+    }
+
 }
 
+object pantallaInicial{
+
+    var property position = game.center()
+    method image() = 'Pantalla_inicio.png'
+
+}
+
+object pantallaInstrucciones{
+
+    var property position = game.center()
+    method image() = 'Pantalla_inicio.png'
+
+}
+
+object nivelBase{
+    method iniciar(){
+      game.addVisual(pantallaInicial)
+    }
+
+    method removerTodo(){
+      game.removeVisual(pantallaInicial)
+    }
+
+    method irAPrimerNivel(){
+      // si aprieta J vamos a primer nivel
+    }
+    method instrucciones(){
+      //si aprieta I vamos a instrucciones
+    }
+}
 
 object nivel1 {
   const elementosNivel = [] 

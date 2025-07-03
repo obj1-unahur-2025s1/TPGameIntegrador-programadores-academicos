@@ -12,5 +12,6 @@ object armadura {
     method chocar(unJugador){
         self.activar(unJugador)
         game.say(jugador, 'Poder Activado')
+        game.removeVisual(self)
     }
 }
