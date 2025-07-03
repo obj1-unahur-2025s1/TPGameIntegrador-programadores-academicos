@@ -18,6 +18,16 @@ object escenario{
     }
     method estadoJuego()=juegoIniciado
 
+  method iniciarInstrucciones(){
+    game.addVisual(pantallaInstrucciones)
+  }
+  method removerGameOver(){
+    game.removeVisual(gameOver)
+  }
+
+  method removerInstrucciones(){
+    game.removeVisual(pantallaInstrucciones)
+  }
      
     method condicionDeSalida() = listaNiveles.get(nivelActual).condicionDeSalida()
     method iniciar(){
@@ -35,8 +45,10 @@ object escenario{
             game.say(jugador, 'Nuevo Nivel!')
         }
         else{
-            game.addVisual(jugador)
-            game.say(jugador,'Juego Completado!!!!')
+            game.addVisual(gameOver)
+            keyboard.space().onPressDo{self.reinicioDeJuego()
+            game.removeVisual(gameOver)}
+            
         }
     }
     method reiniciarNivel(){
@@ -50,16 +62,16 @@ object escenario{
         game.say(jugador, 'Nivel Reiniciado!')        
     }
 
-  method reinicioDeJuego(){
-        listaNiveles.get(nivelActual).removerTodo()
+  method reinicioDeJuego(){        
         nivelActual = 0
+        juegoIniciado = false
+        listaNiveles.get(nivelActual).removerTodo()
         jugador.position(game.origin())
         jugador.restaurarEnergia()
         jugador.limpiarArchivos()   
         jugador.resistencia(1)        
         game.addVisual(jugador) 
-        listaNiveles.get(nivelActual).iniciar()
-        juegoIniciado= false
+        listaNiveles.get(nivelActual).iniciar()       
         game.say(jugador, 'Volver a Sufrir')
     }
 
@@ -67,8 +79,16 @@ object escenario{
 
 object pantallaInstrucciones{
 
-    var property position = game.center()
-    method image() = 'Pantalla_inicio.png'
+    var property position = game.origin()
+    method image() = 'instrucciones.png'
+    method chocar(unJugador){}
+
+}
+
+object gameOver{
+  var property position=game.origin()
+  method image()='gameOver.png'
+  method chocar(unJugador){}
 
 }
 
@@ -84,12 +104,6 @@ object nivelBase{
 
     }
 
-    method irAPrimerNivel(){
-      // si aprieta J vamos a primer nivel
-    }
-    method instrucciones(){
-      //si aprieta I vamos a instrucciones
-    }
 }
 
 object nivel1 {

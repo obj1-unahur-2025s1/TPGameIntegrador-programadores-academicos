@@ -36,7 +36,7 @@ object pantallaInicial{
 
     var property position = game.origin()
 
-    method image() = 'Pantalla_inicio.png'
+    method image() = 'Pantalla_inicio.jpg'
 
     method chocar(unJugador){}
 

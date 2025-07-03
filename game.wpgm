@@ -11,11 +11,17 @@ program juego {
   game.boardGround("fondo_final2.jpg")
   keyboard.j().onPressDo{if(not escenario.estadoJuego()){
     escenario.iniciarJuego()} }
-  //keyboard.i().onPressDo{escenario.pantallaInstrucciones()}
+  keyboard.i().onPressDo{if(not escenario.estadoJuego()){
+    escenario.iniciarInstrucciones()} }    
+  keyboard.m().onPressDo{if(not escenario.estadoJuego()){
+    nivelBase.removerTodo()
+    escenario.removerInstrucciones()
+    escenario.removerGameOver()
+    nivelBase.iniciar()
+    } }
+
   game.addVisualCharacter(jugador)
   escenario.iniciar()
-  keyboard.space().onPressDo{escenario.reinicioDeJuego()}
- 		
 
   game.whenCollideDo(jugador, {elemento => elemento.chocar(jugador)})
   
