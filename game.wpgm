@@ -9,19 +9,38 @@ program juego {
   game.width(8)
   game.height(8)
   game.boardGround("fondo_final2.jpg")
+
+  // BOTONES:
+
   keyboard.j().onPressDo{if(not escenario.estadoJuego()){
-    escenario.iniciarJuego()} }
+    escenario.iniciarJuego()
+    }}
+
+  keyboard.h().onPressDo{if(not escenario.estadoJuego()){
+    escenario.iniciarJuegoDificil()
+    }}
+
   keyboard.i().onPressDo{if(not escenario.estadoJuego()){
-    escenario.iniciarInstrucciones()} }    
+    escenario.iniciarInstrucciones()
+    game.sound("menu-sound.mp3").play()} }  //--- Sonido botones
+
   keyboard.m().onPressDo{if(not escenario.estadoJuego()){
     nivelBase.removerTodo()
     escenario.removerInstrucciones()
     escenario.removerGameOver()
     nivelBase.iniciar()
+    game.sound("menu-sound.mp3").play() //--- Sonido botones
     } }
 
-  game.addVisualCharacter(jugador)
+  keyboard.w().onPressDo { jugador.posicion(jugador.position().up(1)) }
+  keyboard.s().onPressDo { jugador.posicion(jugador.position().down(1)) }
+  keyboard.a().onPressDo { jugador.posicion(jugador.position().left(1)) }
+  keyboard.d().onPressDo { jugador.posicion(jugador.position().right(1)) }
+
+
+  //game.addVisual(jugador)
   escenario.iniciar()
+
 
   game.whenCollideDo(jugador, {elemento => elemento.chocar(jugador)})
   

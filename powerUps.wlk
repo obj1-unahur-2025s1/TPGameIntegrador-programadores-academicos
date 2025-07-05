@@ -11,7 +11,8 @@ object armadura {
     }
     method chocar(unJugador){
         self.activar(unJugador)
-        game.say(jugador, 'Poder Activado')
+        //game.say(jugador, 'Poder Activado')
         game.removeVisual(self)
+        game.sound("shield-guard.mp3").play()
     }
 }

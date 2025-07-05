@@ -7,12 +7,18 @@ import niveles.*
 class Enemigo{
     var property position //= game.center()
     var techo = false
-    method danio() = 5
-    method chocar(unJugador) {
-         unJugador.recibirDaño(self)
-         game.say(jugador, jugador.mensajeEnergia())		 
-    } 
+    var yaChoco = false
 
+    method danio() = 5
+
+    method chocar(unJugador) {if(not yaChoco){
+         unJugador.recibirDaño(self);
+         yaChoco = true
+         //game.say(jugador, jugador.mensajeEnergia());
+         game.sound("player_grunt.wav").play()// --- Sonido golpe
+         game.onTick(5000, "descanso", {yaChoco = false})
+         }
+    } 
 }
 class Firewall inherits Enemigo{
 
