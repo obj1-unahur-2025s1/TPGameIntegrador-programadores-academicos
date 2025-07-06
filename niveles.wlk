@@ -11,8 +11,8 @@ object escenario{
     var juegoIniciado = false
     const musicaTitulo = game.sound("Mega Man 3 (NES) Music - Title Theme.mp3") //-----Musica
     const musicaJuego = game.sound("Muladhara - Digital Devil Saga 1.mp3")
+    var property dificil = false
     
-
 
     method iniciarJuego(){
       juegoIniciado=true
@@ -33,6 +33,7 @@ object escenario{
     method iniciarInstrucciones(){
     game.addVisual(pantallaInstrucciones)
   }
+
     method removerGameOver(){
     game.removeVisual(gameOver)
   }
@@ -44,8 +45,6 @@ object escenario{
     method condicionDeSalida() = listaNiveles.get(nivelActual).condicionDeSalida()
 
     method condicionDeSalidaDificil() = listaNivelesDificiles.get(nivelActual).condicionDeSalida()
-
-
 
     method iniciar(){if(nivelActual == 0){
         listaNiveles.get(nivelActual).iniciar()
@@ -81,9 +80,6 @@ object escenario{
             }
   }
 
-
-
-
     method pasarDeNivelDificil() {
         listaNivelesDificiles.get(nivelActual).removerTodo()
         nivelActual += 1
@@ -108,7 +104,7 @@ object escenario{
             }
   }
 
-
+/*
     method reiniciarNivel(){              //--- Metodo innecesario
         listaNiveles.get(nivelActual).removerTodo()
         jugador.position(game.origin())
@@ -118,9 +114,9 @@ object escenario{
         //game.addVisual(jugador) 
         listaNiveles.get(nivelActual).iniciar() 
         //game.say(jugador, 'Nivel Reiniciado!')        
-    }
+    }*/
 
-  method reinicioDeJuego(){        
+    method reinicioDeJuego(){        
         nivelActual = 0
         juegoIniciado = false
         musicaJuego.stop()
@@ -135,6 +131,25 @@ object escenario{
         listaNiveles.get(nivelActual).iniciar()       
         //game.say(jugador, 'Volver a Sufrir')
     }
+
+
+    method reiniciar(){
+      listaNiveles.get(nivelActual).removerTodo()
+      game.addVisual(gameOver)
+      keyboard.space().onPressDo{
+      self.reinicioDeJuego()
+      game.removeVisual(gameOver)}
+    }
+
+     method reiniciarDificil(){
+      listaNivelesDificiles.get(nivelActual).removerTodo()
+      game.addVisual(gameOver)
+      keyboard.space().onPressDo{
+      self.reinicioDeJuego()
+      game.removeVisual(gameOver)}        
+      self.dificil(false)
+    }
+
 
 }
 
@@ -299,15 +314,16 @@ object nivel3 {
 object nivel1D{
   const elementosNivel = [] 
 
+
   method iniciar(){    
     const enemigo1 = new Firewall(position = game.at(6,4))
     const archivo1 = new Archivo(position = game.at(5,5))
+
     elementosNivel.addAll([enemigo1,armadura,archivo1,puertaSalida,jugador,indicadorEnergia,indicadorDatos])
 
     elementosNivel.forEach({e => game.addVisual(e)}) 
 
-    
-    game.onTick(1000, 'movimiento', {enemigo1.mover()})
+    game.onTick(1000, 'movimiento', {enemigo1.mover()}) 
 
 }
 
@@ -315,6 +331,7 @@ object nivel1D{
     elementosNivel.forEach({e => game.removeVisual(e)})
     elementosNivel.clear()
   }
+
   method condicionDeSalida() = 1
 }
 object nivel2D{

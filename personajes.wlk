@@ -7,7 +7,7 @@ import powerUps.*
 object jugador{
     var property position = game.origin()//game.at(0, 0)
     var positionAnterior = game.origin()
-    var energia = 100
+    var energia = 30
     var property resistencia = 1
     var archivosRecolectados = 0     
 
@@ -24,22 +24,24 @@ object jugador{
 
     method limpiarArchivos(){archivosRecolectados = 0}
 
-    method restaurarEnergia(){energia = 100}
+    method restaurarEnergia(){energia = 30}
 
     method recolectar(){
         archivosRecolectados +=1}
 
     method recibirDaño(unEnemigo){
-        if(self.estaMuerto()){
-            //game.say(self, 'Estoy sin energia!')
-            escenario.reiniciarNivel()}
-        else{
-             if (resistencia == 1){
+        if(self.estaMuerto() and not escenario.dificil()){
+        escenario.reiniciar()}
+        else if(self.estaMuerto() and escenario.dificil()){
+        escenario.reiniciarDificil()
+            }
+        else if
+              (resistencia == 1){
                 energia = (energia - unEnemigo.danio()).max(0)
                }
             else {
                 energia = (energia - unEnemigo.danio()/resistencia).max(0)
-              } }       
+              }     
     } 
 
     method image() = if (resistencia==1) "hacker.png" else 'hacker_escudo.png'  
@@ -57,11 +59,18 @@ object jugador{
     method estaMuerto() = energia == 0   
 
     method retroceder(){position = positionAnterior} 
+
+    method curar(){energia += 30}
+
 }
     
 
 object indicadorEnergia{
     var property position =game.at(0,7)
+
+    //var property image = ""
+
+
 
     method text() = "            ENERGIA: " + jugador.energia().toString()
 

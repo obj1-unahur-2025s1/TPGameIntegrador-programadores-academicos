@@ -1,10 +1,10 @@
 
-En el menu principal hacer que las opciones de seleccion cambien de color con las teclas subir y bajar.
+En el menu principal hacer que las opciones de seleccion cambien de color con las teclas subir y bajar. -- HECHO
 
 Musica en pantalla de inicio y luego en el juego musica y efectos de sonido. --- HECHO
 
 Mensajes y valor de la energia como imagen en algun borde del tablero. 
 
-Al inicio establecer facil o dificil.
+Al inicio establecer facil o dificil. -- HECHO
 
 Agregar algun poder.

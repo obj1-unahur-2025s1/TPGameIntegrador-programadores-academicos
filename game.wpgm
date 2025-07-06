@@ -1,3 +1,4 @@
+import objetos.*
 import wollok.game.*
 import personajes.* 
 import niveles.*
@@ -12,19 +13,22 @@ program juego {
 
   // BOTONES:
 
+  keyboard.enter().onPressDo {pantallaInicial.ejecutarSeleccion()
+    }
+
   keyboard.j().onPressDo{if(not escenario.estadoJuego()){
     escenario.iniciarJuego()
     }}
 
   keyboard.h().onPressDo{if(not escenario.estadoJuego()){
     escenario.iniciarJuegoDificil()
-    }}
+    }} 
 
-  keyboard.i().onPressDo{if(not escenario.estadoJuego()){
+//--Botones menu:
+  keyboard.i().onPressDo{if(not escenario.estadoJuego()){ 
     escenario.iniciarInstrucciones()
-    game.sound("menu-sound.mp3").play()} }  //--- Sonido botones
-
-  keyboard.m().onPressDo{if(not escenario.estadoJuego()){
+    } }  
+  keyboard.m().onPressDo{if(not escenario.estadoJuego()){ 
     nivelBase.removerTodo()
     escenario.removerInstrucciones()
     escenario.removerGameOver()
@@ -32,6 +36,10 @@ program juego {
     game.sound("menu-sound.mp3").play() //--- Sonido botones
     } }
 
+  keyboard.up().onPressDo{if(not escenario.estadoJuego()){pantallaInicial.cambiarAnterior();game.sound("menu-sound.mp3").play()}}//--- Sonido botones
+  keyboard.down().onPressDo{if(not escenario.estadoJuego()){pantallaInicial.cambiarSiguiente();game.sound("menu-sound.mp3").play()}}
+
+// --Jugador:
   keyboard.w().onPressDo { jugador.posicion(jugador.position().up(1)) }
   keyboard.s().onPressDo { jugador.posicion(jugador.position().down(1)) }
   keyboard.a().onPressDo { jugador.posicion(jugador.position().left(1)) }

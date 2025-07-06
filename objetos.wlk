@@ -56,8 +56,30 @@ object puertaSalida{
 object pantallaInicial{
 
     var property position = game.origin()
+    const imagenes = ['NORMAL.png', 'DIFICIL.png', 'INSTRUCCIONESS.png']
+    var indiceActual = 0
+    
+    method image() = imagenes.get(indiceActual)
 
-    method image() = 'Pantalla_inicio.jpg'
+    method cambiarSiguiente() {
+        indiceActual = (indiceActual + 1) % imagenes.size() 
+    }
+
+    method cambiarAnterior() {
+        indiceActual = (indiceActual - 1 + imagenes.size()) % imagenes.size() 
+    }
+    
+    method ejecutarSeleccion() {
+    if (indiceActual == 0) {
+        escenario.iniciarJuego() 
+    } else if (indiceActual == 1) {
+        escenario.iniciarJuegoDificil()
+        escenario.dificil(true)
+    } else if (indiceActual == 2) {
+        escenario.iniciarInstrucciones()
+      
+    }
+}
 
     method chocar(unJugador){}
 
