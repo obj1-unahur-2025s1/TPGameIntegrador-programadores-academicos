@@ -10,7 +10,7 @@ object escenario{
     var nivelActual = 0
     var juegoIniciado = false
     const musicaTitulo = game.sound("Mega Man 3 (NES) Music - Title Theme.mp3") //-----Musica
-    const musicaJuego = game.sound("Muladhara - Digital Devil Saga 1.mp3")
+    const musicaJuego = game.sound("musica-juego.mp3")
     var property dificil = false
     
     method posicionAleatoria()= game.at((0..game.width()-1).anyOne(),(0..game.height()-1).anyOne())
@@ -157,7 +157,7 @@ object escenario{
 object pantallaInstrucciones{
 
     var property position = game.origin()
-    method image() = 'instrucciones.png'
+    method image() = 'instruccionesfinal.jpg'
     method chocar(unJugador){}
 
 }
