@@ -13,6 +13,7 @@ object escenario{
     const musicaJuego = game.sound("Muladhara - Digital Devil Saga 1.mp3")
     var property dificil = false
     
+    method posicionAleatoria()= game.at((0..game.width()-1).anyOne(),(0..game.height()-1).anyOne())
 
     method iniciarJuego(){
       juegoIniciado=true
@@ -53,7 +54,7 @@ object escenario{
     } else {
       listaNiveles.get(nivelActual).iniciar()
     }
-        
+            
   }
 
     method pasarDeNivel() {
@@ -192,25 +193,19 @@ object nivel1 {
     const enemigo1 = new Firewall(position = game.at(6,4))
     const enemigo2 = new IATraidora(position = game.at(4,1))
     const enemigo3 = new RobotAntivirus(position = game.at(6,6))
-    const archivo1 = new Archivo(position = game.at(5,5))
-    const archivo2 = new Archivo(position = game.at(0,3))
-    const archivo3 = new Archivo(position = game.at(6,0))    
-    self.agregarTodos([enemigo1,enemigo2,enemigo3,archivo1,archivo2,archivo3,puertaSalida, armadura,jugador,indicadorEnergia,indicadorDatos])
+    const archivo1 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo2 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo3 = new Archivo(position = escenario.posicionAleatoria())  
+    const ob1 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob2 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob3 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob4 = new Obstaculo(position = escenario.posicionAleatoria())
+     
+    self.agregarTodos([enemigo1,enemigo2,enemigo3,archivo1,archivo2,archivo3,puertaSalida, 
+                        recargaEnergia,armadura,jugador,indicadorEnergia,indicadorDatos, ob1, ob2, ob3, ob4])
 
     elementosNivel.forEach({e => game.addVisual(e)})
-
-    //game.addVisual(armadura)      
-    //game.addVisual(enemigo1)
-    //game.addVisual(enemigo2)
-    //game.addVisual(enemigo3)
-    //game.addVisual(archivo1)
-    //game.addVisual(archivo2)
-    //game.addVisual(archivo3)
-    //game.addVisual(puertaSalida)
-    //game.addVisual(indicadorEnergia)
-    //game.addVisual(indicadorDatos)
-    //game.addVisual(jugador)
-    game.addVisual(new Obstaculo(position = game.at(3,5))) // --Probando obstaculo
+     
     game.onTick(600, 'movimiento', {enemigo2.mover();enemigo1.mover();
         enemigo3.mover()})
   }
@@ -222,8 +217,6 @@ object nivel1 {
 
 
   method condicionDeSalida() = 3
-
-
 }
 
 object nivel2 {
@@ -234,28 +227,19 @@ object nivel2 {
     const enemigo2 = new IATraidora(position = game.at(4,1))
     const enemigo3 = new RobotAntivirus(position = game.at(6,6))
     const enemigo4 = new VigilanteIDS(position = game.at(2,2)) 
-    const archivo1 = new Archivo(position = game.at(5,5))
-    const archivo2 = new Archivo(position = game.at(0,3))
-    const archivo3 = new Archivo(position = game.at(6,0))
-    const archivo4 = new Archivo(position = game.at(2,7))
+    const archivo1 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo2 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo3 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo4 = new Archivo(position = escenario.posicionAleatoria())
+    const ob1 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob2 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob3 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob4 = new Obstaculo(position = escenario.posicionAleatoria())
     self.agregarTodos([enemigo1,enemigo2,enemigo3,enemigo4,archivo1,archivo2,archivo3,archivo4,armadura,puertaSalida, 
-                        jugador,indicadorEnergia,indicadorDatos])
+                        jugador,indicadorEnergia,indicadorDatos,ob1,ob2,ob3,ob4])
 
     elementosNivel.forEach({e => game.addVisual(e)})
-
-    //game.addVisual(armadura)     
-    //game.addVisual(enemigo1)
-    //game.addVisual(enemigo2)
-    //game.addVisual(enemigo3)
-    //game.addVisual(enemigo4)
-    //game.addVisual(archivo1)
-    //game.addVisual(archivo2)
-    //game.addVisual(archivo3)
-    //game.addVisual(archivo4)
-    //game.addVisual(puertaSalida)
-    //game.addVisual(indicadorEnergia)
-    //game.addVisual(indicadorDatos)
-    //game.addVisual(jugador)
+    
     game.onTick(1000, 'movimiento', {enemigo2.mover();enemigo1.mover();
         enemigo3.mover();enemigo4.mover()})
   }
@@ -274,31 +258,20 @@ object nivel3 {
     const enemigo3 = new RobotAntivirus(position = game.at(6,6))
     const enemigo4 = new VigilanteIDS(position = game.at(2,2)) 
     const enemigo5 = new Firewall(position = game.at(4,6))
-    const archivo1 = new Archivo(position = game.at(5,5))
-    const archivo2 = new Archivo(position = game.at(0,3))
-    const archivo3 = new Archivo(position = game.at(6,0))
-    const archivo4 = new Archivo(position = game.at(2,7))
-    const archivo5 = new Archivo(position = game.at(7,2))
-    self.agregarTodos([enemigo1,enemigo2,enemigo3,enemigo4,enemigo5,armadura, 
+    const archivo1 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo2 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo3 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo4 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo5 = new Archivo(position = escenario.posicionAleatoria())
+    const ob1 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob2 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob3 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob4 = new Obstaculo(position = escenario.posicionAleatoria())
+    self.agregarTodos([enemigo1,enemigo2,enemigo3,enemigo4,enemigo5,armadura,ob1,ob2,ob3,ob4, 
                      archivo1,archivo2,archivo3,archivo4,archivo5,puertaSalida,jugador,indicadorEnergia,indicadorDatos])
 
     elementosNivel.forEach({e => game.addVisual(e)}) 
-
-    //game.addVisual(armadura)                      
-    //game.addVisual(enemigo1)
-    //game.addVisual(enemigo2)
-    //game.addVisual(enemigo3)
-    //game.addVisual(enemigo4)
-    //game.addVisual(enemigo5)
-    //game.addVisual(archivo1)
-    //game.addVisual(archivo2)
-    //game.addVisual(archivo3)
-    //game.addVisual(archivo4)
-    //game.addVisual(archivo5)
-    //game.addVisual(puertaSalida)
-    //game.addVisual(indicadorEnergia)
-    //game.addVisual(indicadorDatos)
-    //game.addVisual(jugador)
+    
     game.onTick(1000, 'movimiento', {enemigo2.mover();enemigo1.mover();
         enemigo3.mover();enemigo4.mover();enemigo5.mover()})
     }
@@ -317,13 +290,25 @@ object nivel1D{
 
   method iniciar(){    
     const enemigo1 = new Firewall(position = game.at(6,4))
-    const archivo1 = new Archivo(position = game.at(5,5))
+    const enemigo2 = new IATraidora(position = game.at(4,1))
+    const enemigo3 = new RobotAntivirus(position = game.at(6,6))
+    const archivo1 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo2 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo3 = new Archivo(position = escenario.posicionAleatoria())  
+    const ob1 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob2 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob3 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob4 = new Obstaculo(position = escenario.posicionAleatoria())
 
-    elementosNivel.addAll([enemigo1,armadura,archivo1,puertaSalida,jugador,indicadorEnergia,indicadorDatos])
+    elementosNivel.addAll([temporizador,enemigo1,armadura,archivo1,puertaSalida,jugador,indicadorEnergia,indicadorDatos,
+                            enemigo2,enemigo3,ob1,ob2,ob3,ob4,enemigo2,enemigo3, archivo2,archivo3])
 
     elementosNivel.forEach({e => game.addVisual(e)}) 
+    temporizador.reiniciar()
+    temporizador.iniciar()
 
-    game.onTick(1000, 'movimiento', {enemigo1.mover()}) 
+    game.onTick(500, 'movimiento', {enemigo1.mover()}) 
+ 
 
 }
 
@@ -332,17 +317,30 @@ object nivel1D{
     elementosNivel.clear()
   }
 
-  method condicionDeSalida() = 1
+  method condicionDeSalida() = 3
 }
 object nivel2D{
   const elementosNivel = [] 
 
   method iniciar(){    
     const enemigo1 = new Firewall(position = game.at(6,4))
-    const archivo1 = new Archivo(position = game.at(5,5))
-    elementosNivel.addAll([enemigo1,armadura,archivo1,puertaSalida,jugador,indicadorEnergia,indicadorDatos])
+    const enemigo2 = new IATraidora(position = game.at(4,1))
+    const enemigo3 = new RobotAntivirus(position = game.at(6,6))
+    const enemigo4 = new VigilanteIDS(position = game.at(2,2)) 
+    const archivo1 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo2 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo3 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo4 = new Archivo(position = escenario.posicionAleatoria())
+    const ob1 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob2 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob3 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob4 = new Obstaculo(position = escenario.posicionAleatoria())
+    elementosNivel.addAll([enemigo1,armadura,archivo1,puertaSalida,jugador,indicadorEnergia,indicadorDatos
+                            , temporizador,enemigo2, enemigo3,enemigo4,archivo2,archivo3,archivo4,recargaEnergia])
 
     elementosNivel.forEach({e => game.addVisual(e)}) 
+    temporizador.reiniciar()
+    temporizador.iniciar()
 
     
     game.onTick(1000, 'movimiento', {enemigo1.mover()})
@@ -353,17 +351,33 @@ object nivel2D{
     elementosNivel.forEach({e => game.removeVisual(e)})
     elementosNivel.clear()
   }
-  method condicionDeSalida() = 1
+  method condicionDeSalida() = 4
 }
 object nivel3D{
   const elementosNivel = [] 
 
   method iniciar(){    
     const enemigo1 = new Firewall(position = game.at(6,4))
-    const archivo1 = new Archivo(position = game.at(5,5))
-    elementosNivel.addAll([enemigo1,armadura,archivo1,puertaSalida,jugador,indicadorEnergia,indicadorDatos])
+    const enemigo2 = new IATraidora(position = game.at(4,1))
+    const enemigo3 = new RobotAntivirus(position = game.at(6,6))
+    const enemigo4 = new VigilanteIDS(position = game.at(2,2)) 
+    const enemigo5 = new Firewall(position = game.at(4,6))
+    const archivo1 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo2 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo3 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo4 = new Archivo(position = escenario.posicionAleatoria())
+    const archivo5 = new Archivo(position = escenario.posicionAleatoria())
+    const ob1 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob2 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob3 = new Obstaculo(position = escenario.posicionAleatoria())
+    const ob4 = new Obstaculo(position = escenario.posicionAleatoria())
+    elementosNivel.addAll([enemigo1,armadura,archivo1,puertaSalida,jugador,indicadorEnergia,indicadorDatos
+                            , enemigo2,enemigo3,enemigo4, enemigo5, archivo2, archivo3, archivo4, archivo5
+                            , temporizador,recargaEnergia])
 
     elementosNivel.forEach({e => game.addVisual(e)}) 
+    temporizador.reiniciar()
+    temporizador.iniciar()
 
     
     game.onTick(1000, 'movimiento', {enemigo1.mover()})
@@ -374,5 +388,5 @@ object nivel3D{
     elementosNivel.forEach({e => game.removeVisual(e)})
     elementosNivel.clear()
   }
-  method condicionDeSalida() = 1
+  method condicionDeSalida() = 5
 }

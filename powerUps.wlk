@@ -1,5 +1,6 @@
 import wollok.game.*
 import personajes.*
+import niveles.*
 
 
 object armadura {
@@ -20,7 +21,7 @@ object armadura {
 
 
 object recargaEnergia{
-    var property position = game.at(6,6)
+    var property position = escenario.posicionAleatoria()
     method image() = 'Pila.png'
 
     method activar(unJugador){

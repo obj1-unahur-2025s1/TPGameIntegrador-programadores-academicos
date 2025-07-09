@@ -84,6 +84,20 @@ object pantallaInicial{
     method chocar(unJugador){}
 
 }
+object temporizador {
+    var property position = game.at(0,5)
+    var property segundos = 30
+
+    method text() ="       TIEMPO: " + segundos.toString()
+    method iniciar(){
+        game.onTick(1000, "cronometro",{
+            segundos = (segundos-1).max(0)
+        })
+    }
+    method reiniciar(){segundos = 30}
+    method chocar(unJugador){}
+  
+}
 
 
 class Obstaculo{
