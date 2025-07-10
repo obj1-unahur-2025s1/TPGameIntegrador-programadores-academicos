@@ -326,7 +326,7 @@ object nivel1D{
     const ob4 = new Obstaculo(position = escenario.posicionAleatoria())
 
     elementosNivel.addAll([ enemigo1,enemigo2,enemigo3,archivo1,archivo2,archivo3,ob1,ob2,ob3,ob4,
-                            jugador,temporizador,puertaSalida,indicadorDatos,indicadorEnergia])
+                            jugador,temporizador,puertaSalida,indicadorDatos,indicadorEnergia,recargaEnergia])
 
     elementosNivel.forEach({e => game.addVisual(e)}) 
     temporizador.reiniciar()
@@ -361,7 +361,7 @@ object nivel2D{
     const ob3 = new Obstaculo(position = escenario.posicionAleatoria())
     const ob4 = new Obstaculo(position = escenario.posicionAleatoria())
     elementosNivel.addAll([enemigo1,enemigo2,enemigo3,enemigo4,archivo1,archivo2,archivo3,archivo4,ob1,ob2,ob3,ob4,
-                            jugador,temporizador,puertaSalida,indicadorDatos,indicadorEnergia])
+                            jugador,temporizador,puertaSalida,indicadorDatos,indicadorEnergia, recargaEnergia])
 
     elementosNivel.forEach({e => game.addVisual(e)}) 
     temporizador.reiniciar()
@@ -397,7 +397,7 @@ object nivel3D{
     const ob3 = new Obstaculo(position = escenario.posicionAleatoria())
     const ob4 = new Obstaculo(position = escenario.posicionAleatoria())
     elementosNivel.addAll([enemigo1,enemigo2,enemigo3,enemigo4,enemigo5,archivo1,archivo2,archivo3,archivo4,archivo5,
-                           ob1,ob2,ob3,ob4,jugador,temporizador,puertaSalida,indicadorDatos,indicadorEnergia])
+                           ob1,ob2,ob3,ob4,jugador,temporizador,puertaSalida,indicadorDatos,indicadorEnergia,recargaEnergia])
 
     elementosNivel.forEach({e => game.addVisual(e)}) 
     temporizador.reiniciar()

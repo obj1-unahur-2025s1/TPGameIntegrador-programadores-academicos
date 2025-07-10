@@ -60,6 +60,12 @@ Objetos especiales que otorgan ventajas al hacker:
 ![alt text](assets/armadura.png)
 ![alt text](assets/hacker_escudo.png)
 
+- **Recarga de Energia**: recarga toda la energia al jugador.
+![alt text](assets/Pila.png)
+
+- **Paralizador de Tiempo**: paraliza los enemigos por un lapso de 2,5 segundos.
+![alt text](assets/relojfutu2.png)
+
 ### 🚪 Puerta de enlace
 - Solo se habilita cuando ya no quedan archivos por recoletar.
 - Permite avanzar al siguiente nivel, donde aumenta poco a poco la dificultad.
