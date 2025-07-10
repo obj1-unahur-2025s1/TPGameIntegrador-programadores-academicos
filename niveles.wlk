@@ -4,6 +4,8 @@ import powerUps.*
 import enemigos.*
 import objetos.*
 
+
+
 object escenario{
     const listaNiveles =[nivelBase, nivel1, nivel2, nivel3]
     const listaNivelesDificiles = [nivelBase,nivel1D,nivel2D,nivel3D] // Proximamente...
@@ -42,6 +44,8 @@ object escenario{
     method removerInstrucciones(){
     game.removeVisual(pantallaInstrucciones)
   }
+
+    method obtenerNivelActual() = listaNiveles.get(nivelActual)
      
     method condicionDeSalida() = listaNiveles.get(nivelActual).condicionDeSalida()
 
@@ -186,11 +190,7 @@ object nivelBase{
 
 object nivel1 {
   const elementosNivel = [] 
-
-  method agregarTodos(unaLista) = elementosNivel.addAll(unaLista) 
-
-  method iniciar(){
-    const enemigo1 = new Firewall(position = game.at(6,4))
+  const enemigo1 = new Firewall(position = game.at(6,4))
     const enemigo2 = new IATraidora(position = game.at(4,1))
     const enemigo3 = new RobotAntivirus(position = game.at(6,6))
     const archivo1 = new Archivo(position = escenario.posicionAleatoria())
@@ -200,13 +200,23 @@ object nivel1 {
     const ob2 = new Obstaculo(position = escenario.posicionAleatoria())
     const ob3 = new Obstaculo(position = escenario.posicionAleatoria())
     const ob4 = new Obstaculo(position = escenario.posicionAleatoria())
-     
+  method agregarTodos(unaLista) = elementosNivel.addAll(unaLista) 
+
+  method detenerEnemigosTemporalmente() {
+    game.removeTickEvent('movimiento')
+    game.schedule(2500, {game.onTick(1000, 'movimiento', {enemigo2.mover();enemigo1.mover();
+        enemigo3.mover()})})
+  }
+  method iniciar(){
+    
     self.agregarTodos([enemigo1,enemigo2,enemigo3,archivo1,archivo2,archivo3,puertaSalida, 
-                        recargaEnergia,armadura,jugador,indicadorEnergia,indicadorDatos, ob1, ob2, ob3, ob4])
+                        recargaEnergia,relojCibernetico,armadura,jugador,indicadorEnergia,indicadorDatos, ob1, ob2, ob3, ob4])
 
     elementosNivel.forEach({e => game.addVisual(e)})
-     
-    game.onTick(600, 'movimiento', {enemigo2.mover();enemigo1.mover();
+
+    
+      
+   game.onTick(600, 'movimiento', {enemigo2.mover();enemigo1.mover();
         enemigo3.mover()})
   }
 
@@ -221,8 +231,6 @@ object nivel1 {
 
 object nivel2 {
     const elementosNivel = [] 
-    method agregarTodos(unaLista) = elementosNivel.addAll(unaLista) 
-    method iniciar(){     
     const enemigo1 = new Firewall(position = game.at(6,4))
     const enemigo2 = new IATraidora(position = game.at(4,1))
     const enemigo3 = new RobotAntivirus(position = game.at(6,6))
@@ -235,13 +243,21 @@ object nivel2 {
     const ob2 = new Obstaculo(position = escenario.posicionAleatoria())
     const ob3 = new Obstaculo(position = escenario.posicionAleatoria())
     const ob4 = new Obstaculo(position = escenario.posicionAleatoria())
+    method agregarTodos(unaLista) = elementosNivel.addAll(unaLista) 
+    
+    method detenerEnemigosTemporalmente() {
+    game.removeTickEvent('movimiento')
+    game.schedule(2500, {game.onTick(1000, 'movimiento', {enemigo2.mover();enemigo1.mover();
+        enemigo3.mover()})})
+  }
+    method iniciar(){     
     self.agregarTodos([enemigo1,enemigo2,enemigo3,enemigo4,archivo1,archivo2,archivo3,archivo4,armadura,puertaSalida, 
-                        jugador,indicadorEnergia,indicadorDatos,ob1,ob2,ob3,ob4])
+                        jugador,relojCibernetico,indicadorEnergia,indicadorDatos,ob1,ob2,ob3,ob4])
 
     elementosNivel.forEach({e => game.addVisual(e)})
     
-    game.onTick(1000, 'movimiento', {enemigo2.mover();enemigo1.mover();
-        enemigo3.mover();enemigo4.mover()})
+   game.onTick(1000, 'movimiento', {enemigo2.mover();enemigo1.mover();
+   enemigo3.mover();enemigo4.mover()})
   }
   method removerTodo(){
     elementosNivel.forEach({e => game.removeVisual(e)})
@@ -251,8 +267,6 @@ object nivel2 {
 }
 object nivel3 {
     const elementosNivel = [] 
-    method agregarTodos(unaLista) = elementosNivel.addAll(unaLista) 
-    method iniciar(){    
     const enemigo1 = new Firewall(position = game.at(6,4))
     const enemigo2 = new IATraidora(position = game.at(4,1))
     const enemigo3 = new RobotAntivirus(position = game.at(6,6))
@@ -267,11 +281,21 @@ object nivel3 {
     const ob2 = new Obstaculo(position = escenario.posicionAleatoria())
     const ob3 = new Obstaculo(position = escenario.posicionAleatoria())
     const ob4 = new Obstaculo(position = escenario.posicionAleatoria())
+
+    method agregarTodos(unaLista) = elementosNivel.addAll(unaLista) 
+
+    method detenerEnemigosTemporalmente() {
+    game.removeTickEvent('movimiento')
+    game.schedule(2500, {game.onTick(1000, 'movimiento', {enemigo2.mover();enemigo1.mover();
+        enemigo3.mover()})})
+  }
+
+    method iniciar(){    
     self.agregarTodos([enemigo1,enemigo2,enemigo3,enemigo4,enemigo5,armadura,ob1,ob2,ob3,ob4, 
-                     archivo1,archivo2,archivo3,archivo4,archivo5,puertaSalida,jugador,indicadorEnergia,indicadorDatos])
+                     archivo1,archivo2,archivo3,archivo4,archivo5,relojCibernetico,puertaSalida,jugador,indicadorEnergia,indicadorDatos])
 
     elementosNivel.forEach({e => game.addVisual(e)}) 
-    
+   
     game.onTick(1000, 'movimiento', {enemigo2.mover();enemigo1.mover();
         enemigo3.mover();enemigo4.mover();enemigo5.mover()})
     }

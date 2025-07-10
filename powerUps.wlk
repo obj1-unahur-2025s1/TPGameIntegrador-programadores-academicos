@@ -19,6 +19,20 @@ object armadura {
     }
 }
 
+object relojCibernetico {
+  var property position =  escenario.posicionAleatoria()
+   method image() = 'tiempo.png'
+
+     method activar(unJugador){
+      escenario.obtenerNivelActual().detenerEnemigosTemporalmente()
+    }
+    method chocar(unJugador){
+        self.activar(unJugador)
+        game.removeVisual(self)
+        game.sound("clock-ticking.mp3").play()
+    }
+}
+
 
 object recargaEnergia{
     var property position = escenario.posicionAleatoria()
