@@ -1,10 +1,9 @@
 import wollok.game.*
 import personajes.*
-import niveles.*
 
 
 object armadura {
-    var property position = game.at(3,3)
+    var property position = self.posicionAleatoria()
     method image() = 'armadura.png'
 
     method activar(unJugador){
@@ -17,25 +16,12 @@ object armadura {
         game.removeVisual(self)
         game.sound("shield-guard.mp3").play()
     }
-}
-
-object relojCibernetico {
-  var property position =  escenario.posicionAleatoria()
-   method image() = 'relojfutu2.png'
-
-     method activar(unJugador){
-      escenario.obtenerNivelActual().detenerEnemigosTemporalmente()
-    }
-    method chocar(unJugador){
-        self.activar(unJugador)
-        game.removeVisual(self)
-        game.sound("clock-ticking.mp3").play()
-    }
+    method posicionAleatoria() = game.at((0..9).anyOne(),(0..9).anyOne())
 }
 
 
 object recargaEnergia{
-    var property position = escenario.posicionAleatoria()
+    var property position = self.posicionAleatoria()
     method image() = 'Pila.png'
 
     method activar(unJugador){
@@ -47,4 +33,5 @@ object recargaEnergia{
         game.removeVisual(self)
 
     }
+    method posicionAleatoria() = game.at((0..9).anyOne(),(0..9).anyOne())
 }
