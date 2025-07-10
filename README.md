@@ -8,7 +8,7 @@
 - Thomas
 
 ## Capturas
-![Pantalla](assets/Pantalla_inicio.jpg)
+![Pantalla](assets/pantallaInicio2.png)
 ![Juego](assets/Captura_juego.png)
 
 
