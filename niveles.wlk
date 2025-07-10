@@ -49,7 +49,7 @@ object escenario{
      
     method condicionDeSalida() = listaNiveles.get(nivelActual).condicionDeSalida()
 
-    method condicionDeSalidaDificil() = listaNivelesDificiles.get(nivelActual).condicionDeSalida()
+    method condicionDeSalidaDificil() = listaNivelesDificiles.get(nivelActual).condicionDeSalida() && temporizador.segundos()>0
 
     method iniciar(){if(nivelActual == 0){
         listaNiveles.get(nivelActual).iniciar()
@@ -150,9 +150,10 @@ object escenario{
       listaNivelesDificiles.get(nivelActual).removerTodo()
       game.addVisual(gameOver)
       keyboard.space().onPressDo{
+      self.dificil(false)  
       self.reinicioDeJuego()
       game.removeVisual(gameOver)}        
-      self.dificil(false)
+      
     }
 
 
@@ -216,7 +217,7 @@ object nivel1 {
 
     
       
-   game.onTick(600, 'movimiento', {enemigo2.mover();enemigo1.mover();
+   game.onTick(1000, 'movimiento', {enemigo2.mover();enemigo1.mover();
         enemigo3.mover()})
   }
 
@@ -256,7 +257,7 @@ object nivel2 {
 
     elementosNivel.forEach({e => game.addVisual(e)})
     
-   game.onTick(1000, 'movimiento', {enemigo2.mover();enemigo1.mover();
+   game.onTick(750, 'movimiento', {enemigo2.mover();enemigo1.mover();
    enemigo3.mover();enemigo4.mover()})
   }
   method removerTodo(){
@@ -296,7 +297,7 @@ object nivel3 {
 
     elementosNivel.forEach({e => game.addVisual(e)}) 
    
-    game.onTick(1000, 'movimiento', {enemigo2.mover();enemigo1.mover();
+    game.onTick(500, 'movimiento', {enemigo2.mover();enemigo1.mover();
         enemigo3.mover();enemigo4.mover();enemigo5.mover()})
     }
     method removerTodo(){
@@ -324,14 +325,14 @@ object nivel1D{
     const ob3 = new Obstaculo(position = escenario.posicionAleatoria())
     const ob4 = new Obstaculo(position = escenario.posicionAleatoria())
 
-    elementosNivel.addAll([temporizador,enemigo1,armadura,archivo1,puertaSalida,jugador,indicadorEnergia,indicadorDatos,
-                            enemigo2,enemigo3,ob1,ob2,ob3,ob4,enemigo2,enemigo3, archivo2,archivo3])
+    elementosNivel.addAll([ enemigo1,enemigo2,enemigo3,archivo1,archivo2,archivo3,ob1,ob2,ob3,ob4,
+                            jugador,temporizador,puertaSalida,indicadorDatos,indicadorEnergia])
 
     elementosNivel.forEach({e => game.addVisual(e)}) 
     temporizador.reiniciar()
     temporizador.iniciar()
 
-    game.onTick(500, 'movimiento', {enemigo1.mover()}) 
+    game.onTick(500, 'movimiento', {enemigo1.mover();enemigo2.mover();enemigo3.mover()}) 
  
 
 }
@@ -359,15 +360,15 @@ object nivel2D{
     const ob2 = new Obstaculo(position = escenario.posicionAleatoria())
     const ob3 = new Obstaculo(position = escenario.posicionAleatoria())
     const ob4 = new Obstaculo(position = escenario.posicionAleatoria())
-    elementosNivel.addAll([enemigo1,armadura,archivo1,puertaSalida,jugador,indicadorEnergia,indicadorDatos
-                            , temporizador,enemigo2, enemigo3,enemigo4,archivo2,archivo3,archivo4,recargaEnergia])
+    elementosNivel.addAll([enemigo1,enemigo2,enemigo3,enemigo4,archivo1,archivo2,archivo3,archivo4,ob1,ob2,ob3,ob4,
+                            jugador,temporizador,puertaSalida,indicadorDatos,indicadorEnergia])
 
     elementosNivel.forEach({e => game.addVisual(e)}) 
     temporizador.reiniciar()
     temporizador.iniciar()
 
     
-    game.onTick(1000, 'movimiento', {enemigo1.mover()})
+    game.onTick(500, 'movimiento', {enemigo1.mover();enemigo2.mover();enemigo3.mver();enemigo4.mover()})
 
 }
 
@@ -395,16 +396,15 @@ object nivel3D{
     const ob2 = new Obstaculo(position = escenario.posicionAleatoria())
     const ob3 = new Obstaculo(position = escenario.posicionAleatoria())
     const ob4 = new Obstaculo(position = escenario.posicionAleatoria())
-    elementosNivel.addAll([enemigo1,armadura,archivo1,puertaSalida,jugador,indicadorEnergia,indicadorDatos
-                            , enemigo2,enemigo3,enemigo4, enemigo5, archivo2, archivo3, archivo4, archivo5
-                            , temporizador,recargaEnergia])
+    elementosNivel.addAll([enemigo1,enemigo2,enemigo3,enemigo4,enemigo5,archivo1,archivo2,archivo3,archivo4,archivo5,
+                           ob1,ob2,ob3,ob4,jugador,temporizador,puertaSalida,indicadorDatos,indicadorEnergia])
 
     elementosNivel.forEach({e => game.addVisual(e)}) 
     temporizador.reiniciar()
     temporizador.iniciar()
 
     
-    game.onTick(1000, 'movimiento', {enemigo1.mover()})
+    game.onTick(500, 'movimiento', {enemigo1.mover();enemigo2.mover();enemigo3.mover();enemigo4.mover();enemigo5.mover()})
 
 }
 

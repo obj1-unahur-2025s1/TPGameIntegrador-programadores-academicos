@@ -28,6 +28,7 @@ Una vez que recolectas todos los archivos, se abre la **puerta de enlace** que p
 - Comenzas con una cierta cantidad de **energía**.
 - Si un enemigo te alcanza, **recibis daño**.
 - El juego reinicia el nivel si la energía del hacker llega a **0**.
+- Las teclas para sus movimientos son **A** : left, **S** : down, **D** : rigth y **W** : up
 ---
 
 ## 👾 Los Enemigos

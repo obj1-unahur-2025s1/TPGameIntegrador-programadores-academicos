@@ -21,7 +21,7 @@ object armadura {
 
 object relojCibernetico {
   var property position =  escenario.posicionAleatoria()
-   method image() = 'tiempo.png'
+   method image() = 'relojfutu.png'
 
      method activar(unJugador){
       escenario.obtenerNivelActual().detenerEnemigosTemporalmente()
